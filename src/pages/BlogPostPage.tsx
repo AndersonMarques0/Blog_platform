@@ -26,7 +26,7 @@ const BlogPostPage = () => {
 
     if (!auth || !blog) return null;
     const post = blog.blogPostList.find((post) => post.id === Number(id));
-    if (!post) return <div>Blog niet gevonden!</div>;
+    if (!post) return <div>Blog didn't found!</div>;
 
     return (
         <div className='bg-white h-screen'>

@@ -52,12 +52,22 @@ app.get('/blogs/:id', async (req, res) => {
 
 // blog aanmaken
 app.post('/blogs', async (req, res) => {
-    const { title, content, user_id, read_time, tags } = req.body;
-    const results = await pool.query(
+    try {
+      console.log('POST /blogs:', req.body)
+      const { title, content, user_id, read_time, tags } = req.body;
+      const results = await pool.query(
         'INSERT INTO blogs (title ,content, user_id, read_time, tags) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [title, content, user_id, read_time, tags]
-    );
-    res.json(results.rows[0]);
+      );
+      res.json(results.rows[0]);
+    } catch (error) {
+      console.log('Erro ao criar blog:', error)
+
+      res.status(500).json({
+        message: 'Failed to create blog'
+    })
+  }
+    
 });
 
 // like aanmaken
@@ -114,12 +124,15 @@ app.post('/users', async (req, res) => {
             [name, usersname, avatar, email, hashedPassword]
         );
         res.json(results.rows[0]);
-    } catch (err) {
-        if (err.code === '23505') {
-            return res.status(400).json({ message: 'Email already exists' });
-        }
-        res.status(500).json({ message: 'Something went wrong' });
+  } catch (err) {
+    console.error('Erro ao cadastrar usuário:', err);
+
+    if (err.code === '23505') {
+      return res.status(400).json({ message: 'Email already exists' });
     }
+
+    res.status(500).json({ message: 'Something went wrong' });
+  }
 });
 
 // user inloggen
@@ -206,6 +219,13 @@ app.post('/upload', upload.single('avatar'), async (req, res) => {
     }
 });
 
+pool.query('SELECT NOW()')
+    .then(result => {
+        console.log('PostgreSQL conectado:', result.rows[0].now);
+    })
+    .catch(error => {
+        console.error('Erro ao conectar ao PostgreSQL:', error.message);
+    });
 
 app.listen(3001, () => {
     console.log('Db runs on port 3001');

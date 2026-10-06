@@ -61,10 +61,6 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
                                         />
                                     ) 
                                 }
-                                
-                                    
-                                    
-                            
                             </div>
                             <div className='text-[14px]'>{post.like_count}</div>
                         </div>
@@ -80,7 +76,7 @@ const BlogCard = ({ post }: { post: BlogPost }) => {
                     <div className='flex gap-4'>
                         <div className='flex gap-1 text-[14px] text-gray-600'>
                             {Math.ceil(post.content.length / 200)}
-                            <p>min lezen</p>
+                            <p>Read less</p>
                         </div>
                         <div>
                             <FaRegBookmark className='mt-1' />

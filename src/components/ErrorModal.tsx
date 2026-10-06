@@ -14,7 +14,7 @@ const ErrorModal = () => {
                         <div className="bg-red-100 rounded-full p-1">
                             <IoMdClose className="text-red-500 size-4" />
                         </div>
-                        <p className="font-semibold text-gray-800">Er ging iets mis</p>
+                        <p className="font-semibold text-gray-800">Something went wrong!</p>
                     </div>
 
                 </div>
@@ -22,7 +22,7 @@ const ErrorModal = () => {
                 <button
                     onClick={() => auth.setError(null)}
                     className="bg-gray-800 hover:bg-gray-700 text-white rounded-lg py-2 text-sm transition-colors">
-                    Sluiten
+                    Close
                 </button>
             </div>
         </div>

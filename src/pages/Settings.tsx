@@ -36,7 +36,7 @@ const Settings = () => {
                 <button
                     onClick={() => profilEdit ? handleSave() : setProfilEdit(true)}
                     className='bg-gray-800 hover:bg-gray-700 px-2 text-white rounded-lg py-1.5 text-sm transition-colors'>
-                    {profilEdit ? 'Opslaan' : 'Bewerk profiel'}
+                    {profilEdit ? 'Save' : 'Edit profile'}
                 </button>
             </div>
 
@@ -49,7 +49,7 @@ const Settings = () => {
     />
     {profilEdit && (
         <label className='absolute inset-0 rounded-full cursor-pointer bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity'>
-            <span className='text-white text-xs'>Wijzig</span>
+            <span className='text-white text-xs'>Change</span>
             <input type='file' accept='image/*' onChange={handleAvatarUpload} className='hidden' />
         </label>
     )}
@@ -58,7 +58,7 @@ const Settings = () => {
 
             <div className='text-[17px] gap-2 text-gray-800 font-semibold flex flex-col items-center mt-6'>
                 <div className='flex flex-col items-center'>
-                    <div>Naam</div>
+                    <div>Name</div>
                     {profilEdit ? (
                         <input className='text-gray-500 pl-2 border rounded' value={editName} onChange={(e) => setEditName(e.target.value)} />
                     ) : (
@@ -66,7 +66,7 @@ const Settings = () => {
                     )}
                 </div>
                 <div className='flex flex-col items-center'>
-                    <div>Gebruikersnaam</div>
+                    <div>Username</div>
                     {profilEdit ? (
                         <input className='text-gray-500 pl-2 border rounded' value={editUserName} onChange={(e) => setEditUserName(e.target.value)} />
                     ) : (

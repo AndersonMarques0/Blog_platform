@@ -3,7 +3,7 @@ import { useState, useEffect, type ReactNode } from 'react';
 import { AuthContext } from './AuthContext';
 import type { UserArrayData, User } from '../data/types';
 
-const API = 'https://blog-platform-vdyb.onrender.com';
+const API = 'http://localhost:3001';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [userModal, setUserModal] = useState<boolean>(false);
@@ -24,9 +24,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 body: JSON.stringify(userData),
             });
             const newUser = await res.json();
+            
+            if(!res.ok) {
+              setError(newUser.message || 'Could not register user.')
+              return
+            }
+            
             setCurrentUser(newUser);
         } catch (error) {
-            setError('Er is iets misgegaan, probeer opnieuw.');
+            console.log('Register error:', error)
+            setError('Something went wrong; please try again.');
         }
     };
 
@@ -46,7 +53,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setLoginError(user.message);
             }
         } catch (error) {
-            setError('Er is iets misgegaan, probeer opnieuw.');
+            setError('Something went wrong; please try again.');
         }
     };
 
@@ -56,7 +63,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             localStorage.removeItem('currentUser');
             setUserModal(false);
         } catch (error) {
-            setError('Er is iets misgegaan, probeer opnieuw.');
+            setError('Something went wrong; please try again.');
         }
     };
 
@@ -78,14 +85,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const updatedUser = await res.json();
             setCurrentUser(updatedUser);
         } catch (_error) {
-            setError('Er is iets misgegaan, probeer opnieuw.');
+            setError('Something went wrong; please try again.');
         }
     };
     const uploadAvatar = async (file: File): Promise<string> => {
         const formData = new FormData()
         formData.append('avatar', file)
         
-        const res = await fetch('https://blog-platform-vdyb.onrender.com/upload', {
+        const res = await fetch(`${API}/upload`, {
             method: 'POST',
             body: formData,
         })

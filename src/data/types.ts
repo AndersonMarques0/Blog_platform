@@ -28,7 +28,7 @@ export interface Author {
 export interface UserArrayData {
     id?: number;
     name?: string;
-    usersname?: string;
+    username?: string;
     email?: string;
     avatar?: string;
     password?: string;

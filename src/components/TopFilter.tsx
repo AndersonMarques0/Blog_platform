@@ -9,7 +9,7 @@ const TopFilter = () => {
         <div className='bg-gray-100 h-12 items-center gap-4 px-4 text-[16px] text-gray-600 flex'>
             <p 
             onClick={()=>blog.setFilter('last')}
-            className={blog.filter === 'last' ? 'w-20 font-bold cursor-pointer' : 'w-20 font-normal cursor-pointer'}>Laatste</p>
+            className={blog.filter === 'last' ? 'w-20 font-bold cursor-pointer' : 'w-20 font-normal cursor-pointer'}>Last</p>
             <p 
             onClick={()=>blog.setFilter('top')}
             className={blog.filter === 'top' ? 'w-20 font-bold cursor-pointer' : 'w-20 font-normal cursor-pointer'}>Top</p>

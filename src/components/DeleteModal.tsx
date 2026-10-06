@@ -9,7 +9,7 @@ const DeleteModal = ({ id, blog_id }: { id: number, blog_id: number }) => {
             <div className="rounded-xl flex flex-col gap-4 p-6 w-72 shadow-lg bg-white border border-gray-100">
                 <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2">
-                        <p className="font-semibold text-gray-800">Wil je deze reactie verwijderen?</p>
+                        <p className="font-semibold text-gray-800">Do you want to delete tis comment?</p>
                     </div>
 
                 </div>
@@ -18,7 +18,7 @@ const DeleteModal = ({ id, blog_id }: { id: number, blog_id: number }) => {
                         console.log('deleting comment', id,blog_id)
                         blog.deleteComments(id,blog_id)}}
                     className="bg-gray-800 hover:bg-gray-700 text-white rounded-lg py-2 text-sm transition-colors">
-                    Verwijder
+                    Remove
                 </button>
             </div>
         </div>

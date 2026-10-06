@@ -19,20 +19,20 @@ const UsersModal = () => {
                     <Link to={'instellingen'}>
                         <div 
                         onClick={()=>auth?.setUserModal(false)}
-                        className='cursor-pointer'>Instellingen</div>
+                        className='cursor-pointer'>Institutions</div>
                     </Link>
                     <Link to={'/newblog'}>
                         <div
                             onClick={() => auth?.setUserModal(false)}
                             className='cursor-pointer'>
-                            Nieuw Blog
+                            New Blog
                         </div>
                     </Link>
                 </div>
                 <div
                     onClick={() => auth?.logout()}
                     className='border-t cursor-pointer border-gray-300 pt-3'>
-                    Log uit
+                    Log out
                 </div>
             </div>
         </div>

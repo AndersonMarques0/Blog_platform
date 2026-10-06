@@ -12,7 +12,7 @@ const CommentList = ({post}:{post:BlogPost}) => {
     return (
         <div className='pb-5 border-b border-gray-200'>
             <div className='flex justify-between  pt-4 items-center px-4'>
-                <div className='text-xl font-semibold'>Reacties</div>
+                <div className='text-xl font-semibold'>Comments</div>
 
             </div>
             <div className='flex px-4 my-4 gap-2 items-start'>
@@ -23,7 +23,7 @@ const CommentList = ({post}:{post:BlogPost}) => {
                 />
                 <textarea
                     onChange={(e) => blog.setCommentContent(e.target.value)}
-                    placeholder='Schijf hier je reactie'
+                    placeholder='Write your comment here'
                     className='border p-2 outline-none h-20 w-full border-gray-300 resize-y rounded'
                     value={blog.commentContent}
                     onKeyDown={(e)=> e.key === 'Enter' && blog.addComments(auth.currentUser!.id, post.id, blog.commentContent)}
@@ -31,7 +31,7 @@ const CommentList = ({post}:{post:BlogPost}) => {
             </div>
             <button 
             onClick={()=>blog.addComments(auth.currentUser!.id, post.id, blog.commentContent)}
-            className="bg-gray-800 ml-17 hover:bg-gray-700 text-white rounded-lg py-2 px-10 text-sm transition-colors">Verstuur</button>
+            className="bg-gray-800 ml-17 hover:bg-gray-700 text-white rounded-lg py-2 px-10 text-sm transition-colors">Send</button>
         </div>
     );
 };

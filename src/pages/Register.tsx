@@ -17,7 +17,7 @@ const Register = () => {
     const nav = useNavigate()
     const [avatar, setAvatar] = useState('')
     const [name, setName] = useState('')
-    const [usersname, setUsersName] = useState('')
+    const [username, setusername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [email, setEmail] = useState('')
@@ -25,19 +25,19 @@ const Register = () => {
 
     const validate = () => {
         const newError: ErrorData = {}
-        if (!name.trim()) newError.name = 'need name'
-        if (!usersname.trim()) newError.username = 'need usersname'
+        if (!name.trim()) newError.name = 'need a name'
+        if (!username.trim()) newError.username = 'need a username'
         if (password.trim().length < 8 || password.trim().length > 12) newError.password = 'password needs to be between 8 and 12 characters'
         if (password !== confirmPassword) newError.confirmPassword = 'The passwords need to match'
         if (!email.includes('@')) newError.email = 'Submit a valid email'
-        if (!avatar) newError.avatar = 'Upload een profielfoto'
+        if (!avatar) newError.avatar = 'Upload a profile photo'
         setError(newError)
         return Object.keys(newError).length === 0
     }
 
     const onSubmit = async () => {
         if (validate()) {
-            await auth?.register({ name, usersname, email, avatar, password })
+            await auth?.register({ name, username, email, avatar, password })
             nav('/')
         }
     }
@@ -53,12 +53,12 @@ const Register = () => {
         <div>
             <div className='h-screen bg-white p-4'>
                 <div className='flex justify-between items-center mb-7'>
-                    <div className='text-xl font-bold'>Maak je account</div>
+                    <div className='text-xl font-bold'>Create your account</div>
                     <IoClose onClick={() => nav(-1)} className="size-7 cursor-pointer" />
                 </div>
 
                 <div className='mb-6'>
-                    <div className='text-[18px] mb-3'>Profielfoto</div>
+                    <div className='text-[18px] mb-3'>Profile photo</div>
                     {error.avatar && <p className='text-red-500 text-sm mb-2'>{error.avatar}</p>}
                     <div className='flex items-center gap-4'>
                         {avatar && (
@@ -69,7 +69,7 @@ const Register = () => {
                             />
                         )}
                         <label className='cursor-pointer bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg text-sm transition-colors'>
-                            {avatar ? 'Andere foto kiezen' : 'Upload foto'}
+                            {avatar ? 'Choose another photo' : 'Upload photo'}
                             <input
                                 type='file'
                                 accept='image/*'
@@ -82,7 +82,7 @@ const Register = () => {
 
                 <div>
                     <div className='flex justify-between'>
-                        <div className='text-[18px] mb-2'>Naam <span className='text-red-600'>*</span></div>
+                        <div className='text-[18px] mb-2'>Name <span className='text-red-600'>*</span></div>
                         {error.name && <p className='text-red-500 text-sm mt-1'>{error.name}</p>}
                     </div>
                     <input value={name} onChange={(e) => setName(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='text' required />
@@ -90,10 +90,10 @@ const Register = () => {
 
                 <div>
                     <div className='flex justify-between'>
-                        <div className='text-[18px] mb-2'>Gebruikersnaam <span className='text-red-600'>*</span></div>
+                        <div className='text-[18px] mb-2'>Username <span className='text-red-600'>*</span></div>
                         {error.username && <p className='text-red-500 text-sm mt-1'>{error.username}</p>}
                     </div>
-                    <input value={usersname} onChange={(e) => setUsersName(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='text' required />
+                    <input value={username} onChange={(e) => setusername(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='text' required />
                 </div>
 
                 <div>
@@ -106,7 +106,7 @@ const Register = () => {
 
                 <div>
                     <div className='flex justify-between'>
-                        <div className='text-[18px] mb-2'>Paswoord <span className='text-red-600'>*</span></div>
+                        <div className='text-[18px] mb-2'>Password <span className='text-red-600'>*</span></div>
                         {error.password && <p className='text-red-500 text-sm mt-1'>{error.password}</p>}
                     </div>
                     <input value={password} onChange={(e) => setPassword(e.target.value)} className='border mb-2 pl-2 w-full rounded-sm border-gray-300 h-11' type='password' required />
@@ -114,14 +114,14 @@ const Register = () => {
 
                 <div>
                     <div className='flex justify-between'>
-                        <div className='text-[18px] mb-2'>Paswoord controle <span className='text-red-600'>*</span></div>
+                        <div className='text-[18px] mb-2'>Password check <span className='text-red-600'>*</span></div>
                         {error.confirmPassword && <p className='text-red-500 text-sm mt-1'>{error.confirmPassword}</p>}
                     </div>
                     <input value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className='border w-full pl-2 mb-6 rounded-sm border-gray-300 h-11' type='password' required />
                 </div>
 
                 <button onClick={() => onSubmit()} className='bg-blue-700 py-3 rounded-sm text-white px-4'>
-                    Registreer
+                    Register
                 </button>
             </div>
         </div>

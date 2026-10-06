@@ -6,7 +6,7 @@ import type { BlogPost, BlogComment } from '../data/types';
 import { BlogContext } from './BlogContext';
 import { AuthContext } from './AuthContext';
 
-const API = 'https://blog-platform-vdyb.onrender.com';
+const API = 'http://localhost:3001';
 
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
     const [blogPostList, setBlogPostList] = useState<BlogPost[]>([]);
@@ -30,7 +30,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
                 const data = await res.json();
                 setBlogPostList(data);
             } catch (error) {
-                auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+                auth?.setError('Something went wrong; please try again.')
             }
         };
         fetchBlogs();
@@ -54,7 +54,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             const newBlog = await res.json();
             setBlogPostList([...blogPostList, newBlog]);
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 
@@ -78,7 +78,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
                 blogPostList.map((blog) => (blog.id === id ? editedBlog : blog))
             );
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 
@@ -89,7 +89,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             });
             setBlogPostList(blogPostList.filter((post) => post.id !== id));
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 
@@ -111,7 +111,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             const data = await blogsRes.json();
             setBlogPostList(data);
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 
@@ -126,7 +126,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             const data = await blogsRes.json();
             setBlogPostList(data);
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 
@@ -145,7 +145,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             setComments(commentData);
             setCommentContent('');
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.');
+            auth?.setError('Something went wrong; please try again.');
         }
     };
 
@@ -161,7 +161,7 @@ export const BlogProvider = ({ children }: { children: ReactNode }) => {
             const commentData = await commentRes.json();
             setComments(commentData);
         } catch (error) {
-            auth?.setError('Er is iets misgegaan, probeer opnieuw.')
+            auth?.setError('Something went wrong; please try again.')
         }
     };
 

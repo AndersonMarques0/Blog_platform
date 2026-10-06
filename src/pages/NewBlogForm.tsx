@@ -39,9 +39,9 @@ const NewBlogForm = () => {
             blog.setPreview(true);
         }
     };
-    const handlePublish = () => {
+    const handlePublish = async () => {
         if (validate()) {
-            blog.postBlog();
+            await blog.postBlog();
             blog.setTitleNewBlog('');
             blog.setContentNewBlog('');
             blog.setTags([]);
