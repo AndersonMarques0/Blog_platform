@@ -2,8 +2,7 @@
 import { useState, useEffect, type ReactNode } from 'react';
 import { AuthContext } from './AuthContext';
 import type { UserArrayData, User } from '../data/types';
-
-const API = 'http://localhost:3001';
+import API from '../config/api';
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [userModal, setUserModal] = useState<boolean>(false);

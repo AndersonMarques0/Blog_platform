@@ -5,8 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import type { BlogPost, BlogComment } from '../data/types';
 import { BlogContext } from './BlogContext';
 import { AuthContext } from './AuthContext';
-
-const API = 'http://localhost:3001';
+import API from '../config/api.ts'
 
 export const BlogProvider = ({ children }: { children: ReactNode }) => {
     const [blogPostList, setBlogPostList] = useState<BlogPost[]>([]);

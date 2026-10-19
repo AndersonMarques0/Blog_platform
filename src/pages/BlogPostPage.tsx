@@ -8,6 +8,7 @@ import FooterMobile from '../components/FooterMobile';
 import LikeBox from '../components/LikeBox';
 import { AuthContext } from '../context/AuthContext';
 import CommentCard from '../components/CommentCard';
+import API from '../config/api.ts'
 
 const BlogPostPage = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ const BlogPostPage = () => {
 
     useEffect(() => {
         const fetchComments = async () => {
-            const res = await fetch(`https://blog-platform-vdyb.onrender.com/comments/${id}`)
+            const res = await fetch(`${API}/comments/${id}`)
             const data = await res.json();
             blog?.setComments(data);
         };
