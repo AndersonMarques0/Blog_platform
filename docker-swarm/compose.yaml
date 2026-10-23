@@ -1,0 +1,53 @@
+services:
+  manager:
+    image: docker:29-dind
+    privileged: true
+    hostname: manager
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --host:tcp://0.0.0.0:2375
+      - --host=unix:///var/run/docker.sock
+    volumes:
+      - manager-data:/var/lib/docker
+    networks:
+      - swarm-net
+    ports:
+      - "127.0.0.1:23750:2375"
+
+  worker1:
+    image: docker:29-dind
+    privileged: true
+    hostname: worker1
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --host:tcp://0.0.0.0:2375
+      - --host=unix:///var/run/docker.sock
+    volumes:
+      - worker1-data:/var/lib/docker
+    networks:
+      - swarm-net
+
+  worker2:
+    image: docker:29-dind
+    privileged: true
+    hostname: worker2
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --host:tcp://0.0.0.0:2375
+      - --host=unix:///var/run/docker.sock
+    volumes:
+      - worker2-data:/var/lib/docker
+    networks:
+      - swarm-net
+
+networks:
+  swarm-net:
+    driver: bridge
+
+volumes:
+  manager-data:
+  worker1-data:
+  worker2-data:
