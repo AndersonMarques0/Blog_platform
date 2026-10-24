@@ -6,7 +6,7 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host:tcp://0.0.0.0:2375
+      - --host=tcp://0.0.0.0:2375
       - --host=unix:///var/run/docker.sock
     volumes:
       - manager-data:/var/lib/docker

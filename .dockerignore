@@ -4,3 +4,7 @@ dist
 .env
 .env.*
 !.env.example
+server/node_modules
+server/.env
+server/.env.*
+backup/
