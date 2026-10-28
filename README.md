@@ -75,3 +75,20 @@ CREATE TABLE comments (
 ```
 
 [Live Demo](https://blog-platform-1-94qc.onrender.com/)
+
+The commands below will be write in Bash.
+
+# Use docker to execute the project
+
+## 1. Install Docker
+[Instalar Docker Engine](https://docs.docker.com/engine/install/)
+[Instalar Docker Compose](https://docs.docker.com/compose/install/)
+
+Check the installation
+```
+docker --version
+docker compose version
+docker info
+```
+
+## 2. Crie os arquivos .env
