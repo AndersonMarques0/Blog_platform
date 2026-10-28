@@ -1,5 +1,5 @@
 node_modules
-dist
+dist/
 .git
 .env
 .env.*
@@ -7,4 +7,5 @@ dist
 server/node_modules
 server/.env
 server/.env.*
+docker-swarm/
 backup/
