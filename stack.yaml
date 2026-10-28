@@ -50,7 +50,7 @@ services:
       replicas: 1
       placement:
         constraints:
-          - node.hostname == vivobook15
+          - node.role == manager
       restart_policy:
         condition: on-failure
       resources:

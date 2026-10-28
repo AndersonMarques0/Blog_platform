@@ -6,12 +6,12 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host=tcp://0.0.0.0:2375
-      - --host=unix:///var/run/docker.sock
+      - --tls=false
     volumes:
       - manager-data:/var/lib/docker
     networks:
-      - swarm-net
+      swarm-net:
+        ipv4_address: 172.30.250.10
     ports:
       - "127.0.0.1:23750:2375"
       - "127.0.0.1:8081:8080"
@@ -24,12 +24,12 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host=tcp://0.0.0.0:2375
-      - --host=unix:///var/run/docker.sock
+      - --tls=false
     volumes:
       - worker1-data:/var/lib/docker
     networks:
-      - swarm-net
+      swarm-net:
+        ipv4_address: 172.30.250.11
 
   worker2:
     image: docker:29-dind
@@ -38,16 +38,19 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host=tcp://0.0.0.0:2375
-      - --host=unix:///var/run/docker.sock
+      - --tls=false
     volumes:
       - worker2-data:/var/lib/docker
     networks:
-      - swarm-net
+      swarm-net:
+        ipv4_address: 172.30.250.12
 
 networks:
   swarm-net:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.250.0/24
 
 volumes:
   manager-data:
