@@ -14,6 +14,8 @@ services:
       - swarm-net
     ports:
       - "127.0.0.1:23750:2375"
+      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:8083:8082"
 
   worker1:
     image: docker:29-dind
@@ -22,7 +24,7 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host:tcp://0.0.0.0:2375
+      - --host=tcp://0.0.0.0:2375
       - --host=unix:///var/run/docker.sock
     volumes:
       - worker1-data:/var/lib/docker
@@ -36,7 +38,7 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     command:
-      - --host:tcp://0.0.0.0:2375
+      - --host=tcp://0.0.0.0:2375
       - --host=unix:///var/run/docker.sock
     volumes:
       - worker2-data:/var/lib/docker
