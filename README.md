@@ -94,15 +94,21 @@ docker info
 ## 2. Crie os arquivos .env
 At the root folder
 .env
+```
 POSTGRES_DB=blog_platform
 POSTGRES_USER=blog_user
 POSTGRES_PASSWORD=senha
+```
 .env.developmento
+```
 VITE_API_URL=http://localhost:3001
+```
 At server/.env
+```
 CLOUDINARY_CLOUD_NAME=valor
 CLOUDINARY_API_KEY=valor
 CLOUDINARY_API_SECRET=valor
+```
 
 ## 3. Check the configuration
 The file docker-swarm/compose.yaml must set three services:
