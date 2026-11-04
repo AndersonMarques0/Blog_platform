@@ -16,8 +16,7 @@ services:
         condition: on-failure
       placement:
         constraints:
-          - node.role == worker1
-        condition: on-failure
+          - node.hostname == worker1
       resources:
         limits:
           memory: 128M
@@ -40,7 +39,7 @@ services:
         condition: on-failure
       placement:
         constraints:
-          - node.role == worker2
+          - node.hostname == worker2
       resources:
         limits:
           memory: 512m
