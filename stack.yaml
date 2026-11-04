@@ -14,6 +14,10 @@ services:
       replicas: 1
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker1
+        condition: on-failure
       resources:
         limits:
           memory: 128M
@@ -34,6 +38,9 @@ services:
       replicas: ${API_REPLICAS:-1}
       restart_policy:
         condition: on-failure
+      placement:
+        constraints:
+          - node.role == worker2
       resources:
         limits:
           memory: 512m
