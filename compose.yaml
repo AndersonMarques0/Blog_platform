@@ -1,65 +1,58 @@
 services:
-  frontend:
-    image: blog-platform-frontend:prod
-    build:
-      context: .
-      dockerfile: Dockerfile
-    mem_limit: 128m
-    cpus: 0.50
-    ports:
-      - "8084:80"
-    depends_on:
-      - api
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  api:
-    image: blog-platform-api:prod
-    build:
-      context: ./server
-      dockerfile: Dockerfile
-    mem_limit: 512m
-    cpus: 1.00
+  manager:
+    image: docker:29-dind
+    privileged: true
+    hostname: manager
     environment:
-      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
-      PORT: "3001"
-    env_file:
-      - ./server/.env
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  db:
-    image: postgres:17
-    mem_limit: 1g
-    cpus: 1.00
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --tls=false
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test:
-        - CMD-SHELL
-        - pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - manager-data:/var/lib/docker
     networks:
-      - app-network
-    restart: unless-stopped
+      swarm-net:
+        ipv4_address: 172.30.250.10
+    ports:
+      - "127.0.0.1:23750:2375"
+      - "127.0.0.1:8081:8080"
+      - "127.0.0.1:8083:8082"
+
+  worker1:
+    image: docker:29-dind
+    privileged: true
+    hostname: worker1
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --tls=false
+    volumes:
+      - worker1-data:/var/lib/docker
+    networks:
+      swarm-net:
+        ipv4_address: 172.30.250.11
+
+  worker2:
+    image: docker:29-dind
+    privileged: true
+    hostname: worker2
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command:
+      - --tls=false
+    volumes:
+      - worker2-data:/var/lib/docker
+    networks:
+      swarm-net:
+        ipv4_address: 172.30.250.12
 
 networks:
-  app-network:
-    external: true
-    name: blog-platform-prod
+  swarm-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.250.0/24
 
 volumes:
-  postgres_data:
-    external: true
-    name: blog_platform_postgres_data
+  manager-data:
+  worker1-data:
+  worker2-data:
